@@ -1,0 +1,25 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  column-gap: 20px;
+  row-gap: 38px;
+  box-sizing: border-box;
+
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 1090px) {
+  .list {
+    gap: 30px;
+    min-height: calc(100vh - 673px);
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .list {
+    gap: 34px;
+    min-height: calc(100vh - 746px);
+
+    margin: 50px 0 0;
+  }
+}
