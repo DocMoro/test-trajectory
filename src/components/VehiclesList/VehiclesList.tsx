@@ -5,10 +5,10 @@ import clsx from 'clsx'
 import s from './VehiclesList.module.scss'
 
 import { VehicleCard } from '../VehicleCard'
-import { TVehicleCard } from '../../constants/type'
+import { TVehicle } from '../../constants/type'
 
 type VehiclesListProps = {
-  vehicles: TVehicleCard[]
+  vehicles: TVehicle[]
   className?: string
 }
 

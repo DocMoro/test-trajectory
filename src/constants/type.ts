@@ -9,8 +9,4 @@ interface TVehicle {
   longitude: number
 }
 
-interface TVehicleCard extends TVehicle {
-  isFavorite: boolean
-}
-
-export type { TVehicle, TVehicleCard }
+export type { TVehicle }

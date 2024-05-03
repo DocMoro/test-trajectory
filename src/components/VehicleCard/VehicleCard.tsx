@@ -1,29 +1,25 @@
-import { FC, useState } from 'react'
+import { FC, useContext } from 'react'
 
-import { TVehicleCard } from '../../constants/type'
+import { TVehicle } from '../../constants/type'
 import clsx from 'clsx'
 
 import s from './VehicleCard.module.scss'
-import { LOCAL_KEY_SAVED } from '../../constants/constants'
+import VehiclesContext from '../../store/VehiclesContext'
+import { updateDatabase } from '../../utils/updateDatabase'
 
 type VehicleCardProps = {
-  vehicle: TVehicleCard
+  vehicle: TVehicle
 }
 
 export const VehicleCard: FC<VehicleCardProps> = ({ vehicle }) => {
-  const { id, name, model, year, color, price, isFavorite } = vehicle
-  const [buttonState, setButtonState] = useState(isFavorite)
+  const { id, name, model, year, color, price } = vehicle
+  const { vehicles, setVehicles } = useContext(VehiclesContext)
 
-  const handleButton = () => {
-    const favoritesData = localStorage.getItem(LOCAL_KEY_SAVED)
+  const handleDeleteButton = () => {
+    const newVehicles = vehicles.filter((vehicle) => vehicle.id !== id)
+    setVehicles(newVehicles)
 
-    if (favoritesData) {
-      const savedVichles = JSON.parse(favoritesData)
-      buttonState ? delete savedVichles[id] : (savedVichles[id] = true)
-      localStorage.setItem(LOCAL_KEY_SAVED, JSON.stringify(savedVichles))
-    }
-
-    setButtonState(!buttonState)
+    updateDatabase(newVehicles)
   }
 
   return (
@@ -46,14 +42,10 @@ export const VehicleCard: FC<VehicleCardProps> = ({ vehicle }) => {
         <p className={s.card__text}>{price} $</p>
       </div>
       <button
-        className={clsx(
-          buttonState ? s.card__button_icon_cross : s.card__button_icon_plus,
-          s.card__button,
-          s.button
-        )}
-        onClick={handleButton}
-        title={buttonState ? 'Remove from favorites' : 'Add to favorites'}
-        type={'button'}
+        className={clsx(s.card__button, s.button)}
+        onClick={handleDeleteButton}
+        title="Remove card"
+        type="button"
       ></button>
     </li>
   )
