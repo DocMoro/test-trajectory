@@ -1,16 +1,30 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 import { TVehicleCard } from '../../constants/type'
 import clsx from 'clsx'
 
 import s from './VehicleCard.module.scss'
+import { LOCAL_KEY_SAVED } from '../../constants/constants'
 
 type VehicleCardProps = {
   vehicle: TVehicleCard
 }
 
 export const VehicleCard: FC<VehicleCardProps> = ({ vehicle }) => {
-  const { name, model, year, color, price, isFavorite } = vehicle
+  const { id, name, model, year, color, price, isFavorite } = vehicle
+  const [buttonState, setButtonState] = useState(isFavorite)
+
+  const handleButton = () => {
+    const favoritesData = localStorage.getItem(LOCAL_KEY_SAVED)
+
+    if (favoritesData) {
+      const savedVichles = JSON.parse(favoritesData)
+      buttonState ? delete savedVichles[id] : (savedVichles[id] = true)
+      localStorage.setItem(LOCAL_KEY_SAVED, JSON.stringify(savedVichles))
+    }
+
+    setButtonState(!buttonState)
+  }
 
   return (
     <li className={s.card}>
@@ -33,12 +47,12 @@ export const VehicleCard: FC<VehicleCardProps> = ({ vehicle }) => {
       </div>
       <button
         className={clsx(
-          isFavorite ? s.card__button_icon_plus : s.card__button_icon_cross,
+          buttonState ? s.card__button_icon_cross : s.card__button_icon_plus,
           s.card__button,
           s.button
         )}
-        onClick={() => console.log('ll')}
-        title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        onClick={handleButton}
+        title={buttonState ? 'Remove from favorites' : 'Add to favorites'}
         type={'button'}
       ></button>
     </li>
