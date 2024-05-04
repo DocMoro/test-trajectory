@@ -8,17 +8,22 @@ import s from './VehicleCard.module.scss'
 type VehicleCardProps = {
   vehicle: TVehicle
   cbCrossButton: (id: number) => void
+  cbCallPopup: (vehicle: TVehicle) => void
 }
 
-export const VehicleCard: FC<VehicleCardProps> = ({ vehicle, cbCrossButton }) => {
+export const VehicleCard: FC<VehicleCardProps> = ({ vehicle, cbCrossButton, cbCallPopup }) => {
   const { id, name, model, year, color, price } = vehicle
 
   const handleCrossButton = () => {
     cbCrossButton(id)
   }
 
+  const handleCallPopup = () => {
+    cbCallPopup(vehicle)
+  }
+
   return (
-    <li className={s.card}>
+    <li className={s.card} onClick={handleCallPopup}>
       <h3 className={s.card__title}>{name}</h3>
       <div className={s.card__textContainer}>
         <h4 className={s.card__subTitle}>Model:</h4>
