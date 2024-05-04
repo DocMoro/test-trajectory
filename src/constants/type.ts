@@ -1,4 +1,4 @@
-interface TVehicle {
+type TVehicle = {
   id: number
   name: string
   model: string
@@ -9,8 +9,4 @@ interface TVehicle {
   longitude: number
 }
 
-interface TVehicleCard extends TVehicle {
-  isFavorite: boolean
-}
-
-export type { TVehicle, TVehicleCard }
+export type { TVehicle }
