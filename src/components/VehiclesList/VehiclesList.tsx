@@ -9,7 +9,7 @@ import { TVehicle } from '../../constants/type'
 
 type VehiclesListProps = {
   vehicles: TVehicle[]
-  cbCrossButton: (id: number) => void
+  cbDeleteCard: (id: number) => void
   cbCallPopup: (vehicle: TVehicle) => void
   className?: string
 }
@@ -17,7 +17,7 @@ type VehiclesListProps = {
 export const VehiclesList: FC<VehiclesListProps> = ({
   vehicles,
   cbCallPopup,
-  cbCrossButton,
+  cbDeleteCard,
   className
 }) => {
   return (
@@ -25,7 +25,7 @@ export const VehiclesList: FC<VehiclesListProps> = ({
       {vehicles.map((vehicle) => (
         <VehicleCard
           vehicle={vehicle}
-          cbCrossButton={cbCrossButton}
+          cbDeleteCard={cbDeleteCard}
           cbCallPopup={cbCallPopup}
           key={vehicle.id}
         />

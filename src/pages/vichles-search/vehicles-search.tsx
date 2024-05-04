@@ -1,15 +1,11 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
-import { VehiclesList } from '../../components/VehiclesList'
 import { TVehicle } from '../../constants/type'
 import { API_PATH, LOCAL_KEY_VEHICLE, sortingDropdownData } from '../../constants/constants'
-import SortingDropdown from '../../components/SortingDropdown/SortingDropdown'
-import s from './vehicles-search.module.scss'
 import { getLocalData, updateDatabase } from '../../utils/database'
-import EditCardFormPopup from '../../components/EditCardForm/EditCardFormPopup'
+import VehiclesSearchContainer from './vehicles-search-container'
 
 const VichlesSearch: FC = () => {
   const [vehicles, setVehicles] = useState<TVehicle[]>([])
-  const [stateForPopup, setStateForPopup] = useState<TVehicle | null>(null)
   const [sortState, setSortState] = useState<string>(sortingDropdownData[0])
 
   const getVichles = async () => {
@@ -29,7 +25,7 @@ const VichlesSearch: FC = () => {
     }
   }
 
-  const cbCrossButton = useCallback(
+  const cbDeleteCard = useCallback(
     (id: number) => {
       const newVehicles = vehicles.filter((vehicle) => vehicle.id !== id)
       setVehicles(newVehicles)
@@ -38,25 +34,6 @@ const VichlesSearch: FC = () => {
     },
     [vehicles]
   )
-
-  const cbClosePopup = useCallback(() => {
-    setStateForPopup(null)
-  }, [])
-
-  const cbSubmitForm = useCallback(
-    (value: TVehicle) => {
-      const newVehicles = vehicles.map((el) => (el.id === value.id ? value : el))
-      setVehicles(newVehicles)
-
-      updateDatabase(newVehicles)
-      cbClosePopup()
-    },
-    [vehicles]
-  )
-
-  const cbCallPopup = useCallback((vehicle: TVehicle) => {
-    setStateForPopup(vehicle)
-  }, [])
 
   const sortingVehicles = useMemo(() => {
     const arr = [...vehicles]
@@ -75,21 +52,14 @@ const VichlesSearch: FC = () => {
   }, [])
 
   return (
-    <section className={s.section}>
-      <SortingDropdown sortState={sortState} setSortState={setSortState} className={s.dropdown} />
-      <VehiclesList
-        vehicles={sortingVehicles}
-        cbCallPopup={cbCallPopup}
-        cbCrossButton={cbCrossButton}
-      />
-      {stateForPopup && (
-        <EditCardFormPopup
-          stateForPopup={stateForPopup}
-          cbClosePopup={cbClosePopup}
-          cbSubmitForm={cbSubmitForm}
-        />
-      )}
-    </section>
+    <VehiclesSearchContainer
+      vehicles={vehicles}
+      setVehicles={setVehicles}
+      sortState={sortState}
+      setSortState={setSortState}
+      sortingVehicles={sortingVehicles}
+      cbDeleteCard={cbDeleteCard}
+    />
   )
 }
 

@@ -1,22 +1,28 @@
-import { FC } from 'react'
+import { FC, SyntheticEvent, useCallback } from 'react'
 
 import { TVehicle } from '../../constants/type'
-import clsx from 'clsx'
 
 import s from './VehicleCard.module.scss'
+import CloseButton from '../CloseButton/CloseButton'
 
 type VehicleCardProps = {
   vehicle: TVehicle
-  cbCrossButton: (id: number) => void
+  cbDeleteCard: (id: number) => void
   cbCallPopup: (vehicle: TVehicle) => void
 }
 
-export const VehicleCard: FC<VehicleCardProps> = ({ vehicle, cbCrossButton, cbCallPopup }) => {
+export const VehicleCard: FC<VehicleCardProps> = ({ vehicle, cbDeleteCard, cbCallPopup }) => {
   const { id, name, model, year, color, price } = vehicle
 
-  const handleCrossButton = () => {
-    cbCrossButton(id)
-  }
+  const handleDeleteCard = useCallback(
+    (event: SyntheticEvent<HTMLButtonElement>) => {
+      if (event.currentTarget === event.target) {
+        cbDeleteCard(id)
+      }
+      event.stopPropagation()
+    },
+    [cbDeleteCard]
+  )
 
   const handleCallPopup = () => {
     cbCallPopup(vehicle)
@@ -41,12 +47,7 @@ export const VehicleCard: FC<VehicleCardProps> = ({ vehicle, cbCrossButton, cbCa
         <h4 className={s.card__subTitle}>Price:</h4>
         <p className={s.card__text}>{price} $</p>
       </div>
-      <button
-        className={clsx(s.card__button, s.button)}
-        onClick={handleCrossButton}
-        title="Remove card"
-        type="button"
-      ></button>
+      <CloseButton title="Remove card" handleClose={handleDeleteCard} />
     </li>
   )
 }
