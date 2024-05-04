@@ -25,8 +25,30 @@
 }
 
 .dialog {
+  position: relative;
   background-color: #5c5c5c;
   padding: 20px;
 
   z-index: 1;
+}
+
+.button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background-image: url('../../assets/cross.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  width: 35px;
+  height: 35px;
+
+  transition: transform 0.4s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.4);
+  }
 }

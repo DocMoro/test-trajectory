@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, SyntheticEvent } from 'react'
 
 import { TVehicle } from '../../constants/type'
 import clsx from 'clsx'
@@ -14,8 +14,11 @@ type VehicleCardProps = {
 export const VehicleCard: FC<VehicleCardProps> = ({ vehicle, cbCrossButton, cbCallPopup }) => {
   const { id, name, model, year, color, price } = vehicle
 
-  const handleCrossButton = () => {
-    cbCrossButton(id)
+  const handleCrossButton = (event: SyntheticEvent<HTMLButtonElement>) => {
+    if (event.currentTarget === event.target) {
+      cbCrossButton(id)
+    }
+    event.stopPropagation()
   }
 
   const handleCallPopup = () => {
