@@ -1,25 +1,20 @@
-import { FC, useContext } from 'react'
+import { FC } from 'react'
 
 import { TVehicle } from '../../constants/type'
 import clsx from 'clsx'
 
 import s from './VehicleCard.module.scss'
-import VehiclesContext from '../../store/VehiclesContext'
-import { updateDatabase } from '../../utils/updateDatabase'
 
 type VehicleCardProps = {
   vehicle: TVehicle
+  cbCrossButton: (id: number) => void
 }
 
-export const VehicleCard: FC<VehicleCardProps> = ({ vehicle }) => {
+export const VehicleCard: FC<VehicleCardProps> = ({ vehicle, cbCrossButton }) => {
   const { id, name, model, year, color, price } = vehicle
-  const { vehicles, setVehicles } = useContext(VehiclesContext)
 
-  const handleDeleteButton = () => {
-    const newVehicles = vehicles.filter((vehicle) => vehicle.id !== id)
-    setVehicles(newVehicles)
-
-    updateDatabase(newVehicles)
+  const handleCrossButton = () => {
+    cbCrossButton(id)
   }
 
   return (
@@ -43,7 +38,7 @@ export const VehicleCard: FC<VehicleCardProps> = ({ vehicle }) => {
       </div>
       <button
         className={clsx(s.card__button, s.button)}
-        onClick={handleDeleteButton}
+        onClick={handleCrossButton}
         title="Remove card"
         type="button"
       ></button>

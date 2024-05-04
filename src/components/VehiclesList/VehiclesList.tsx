@@ -9,14 +9,15 @@ import { TVehicle } from '../../constants/type'
 
 type VehiclesListProps = {
   vehicles: TVehicle[]
+  cbCrossButton: (id: number) => void
   className?: string
 }
 
-export const VehiclesList: FC<VehiclesListProps> = ({ vehicles, className }) => {
+export const VehiclesList: FC<VehiclesListProps> = ({ vehicles, cbCrossButton, className }) => {
   return (
     <ul className={clsx(s.list, className)}>
       {vehicles.map((vehicle) => (
-        <VehicleCard vehicle={vehicle} key={vehicle.id} />
+        <VehicleCard vehicle={vehicle} cbCrossButton={cbCrossButton} key={vehicle.id} />
       ))}
     </ul>
   )

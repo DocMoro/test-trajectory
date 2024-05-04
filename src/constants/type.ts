@@ -1,4 +1,4 @@
-interface TVehicle {
+type TVehicle = {
   id: number
   name: string
   model: string

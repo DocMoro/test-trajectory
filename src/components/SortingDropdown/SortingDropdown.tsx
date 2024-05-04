@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { ChevronDownIcon, DotFilledIcon } from '@radix-ui/react-icons'
 import './SortingDropdown.css'
@@ -6,12 +6,12 @@ import clsx from 'clsx'
 import { sortingDropdownData } from '../../constants/constants'
 
 type SortingDropdownProps = {
+  setSortState: (value: string) => void
+  sortState: string
   className?: string
 }
 
-const SortingDropdown: FC<SortingDropdownProps> = ({ className }) => {
-  const [person, setPerson] = React.useState(sortingDropdownData[0])
-
+const SortingDropdown: FC<SortingDropdownProps> = ({ sortState, className, setSortState }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -19,16 +19,16 @@ const SortingDropdown: FC<SortingDropdownProps> = ({ className }) => {
           className={clsx(className && className, 'IconButton')}
           aria-label="Customise options"
         >
-          <span>{person}</span>
+          <span>{sortState}</span>
           <ChevronDownIcon />
         </button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5} align={'start'}>
-          <DropdownMenu.RadioGroup value={person} onValueChange={setPerson}>
-            {sortingDropdownData.map((data) => (
-              <DropdownMenu.RadioItem className="DropdownMenuRadioItem" value={data}>
+          <DropdownMenu.RadioGroup value={sortState} onValueChange={setSortState}>
+            {sortingDropdownData.map((data, index) => (
+              <DropdownMenu.RadioItem className="DropdownMenuRadioItem" value={data} key={index}>
                 <DropdownMenu.ItemIndicator className="DropdownMenuItemIndicator">
                   <DotFilledIcon />
                 </DropdownMenu.ItemIndicator>
