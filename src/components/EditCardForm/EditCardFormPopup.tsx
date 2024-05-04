@@ -4,6 +4,7 @@ import s from './EditCardFormPopup.module.scss'
 import { TVehicle } from '../../constants/type'
 import { FC, SyntheticEvent, useEffect } from 'react'
 import clsx from 'clsx'
+import { ESC } from '../../constants/constants'
 
 type EditCardFormPopupProps = {
   stateForPopup: TVehicle
@@ -23,7 +24,7 @@ const EditCardFormPopup: FC<EditCardFormPopupProps> = ({
   }
 
   function handleEscKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape') {
+    if (e.key === ESC) {
       cbClosePopup()
     }
   }
