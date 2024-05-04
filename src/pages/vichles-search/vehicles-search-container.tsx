@@ -12,7 +12,7 @@ type VehiclesSearchContainerProps = {
   sortState: string
   setSortState: (str: string) => void
   sortingVehicles: TVehicle[]
-  cbCrossButton: (id: number) => void
+  cbDeleteCard: (id: number) => void
 }
 
 const VehiclesSearchContainer: FC<VehiclesSearchContainerProps> = ({
@@ -21,7 +21,7 @@ const VehiclesSearchContainer: FC<VehiclesSearchContainerProps> = ({
   sortState,
   setSortState,
   sortingVehicles,
-  cbCrossButton
+  cbDeleteCard
 }) => {
   const { stateForPopup, cbSubmitForm, cbCallPopup, cbClosePopup } = usePopup(vehicles, setVehicles)
   return (
@@ -30,7 +30,7 @@ const VehiclesSearchContainer: FC<VehiclesSearchContainerProps> = ({
       <VehiclesList
         vehicles={sortingVehicles}
         cbCallPopup={cbCallPopup}
-        cbCrossButton={cbCrossButton}
+        cbDeleteCard={cbDeleteCard}
       />
       {stateForPopup && (
         <EditCardFormPopup

@@ -2,9 +2,9 @@ import * as Portal from '@radix-ui/react-portal'
 import EditCardForm from './EditCardForm'
 import s from './EditCardFormPopup.module.scss'
 import { TVehicle } from '../../constants/type'
-import { FC, SyntheticEvent, useEffect } from 'react'
-import clsx from 'clsx'
+import { FC, SyntheticEvent, useCallback, useEffect } from 'react'
 import { ESC } from '../../constants/constants'
+import CloseButton from '../CloseButton/CloseButton'
 
 type EditCardFormPopupProps = {
   stateForPopup: TVehicle
@@ -17,11 +17,14 @@ const EditCardFormPopup: FC<EditCardFormPopupProps> = ({
   cbClosePopup,
   cbSubmitForm
 }) => {
-  const handleClosePopup = (event: SyntheticEvent) => {
-    if (event.currentTarget === event.target) {
-      cbClosePopup()
-    }
-  }
+  const handleClosePopup = useCallback(
+    (event: SyntheticEvent) => {
+      if (event.currentTarget === event.target) {
+        cbClosePopup()
+      }
+    },
+    [cbClosePopup]
+  )
 
   function handleEscKeydown(e: KeyboardEvent) {
     if (e.key === ESC) {
@@ -41,12 +44,7 @@ const EditCardFormPopup: FC<EditCardFormPopupProps> = ({
     <Portal.Root className={s.popup} onClick={handleClosePopup}>
       <div className={s.dialog}>
         <EditCardForm stateForPopup={stateForPopup} cbSubmitForm={cbSubmitForm} />
-        <button
-          className={clsx(s.card__button, s.button)}
-          onClick={handleClosePopup}
-          title="Close form"
-          type="button"
-        ></button>
+        <CloseButton title="Close form" handleClose={handleClosePopup} />
       </div>
     </Portal.Root>
   )

@@ -25,7 +25,7 @@ const VichlesSearch: FC = () => {
     }
   }
 
-  const cbCrossButton = useCallback(
+  const cbDeleteCard = useCallback(
     (id: number) => {
       const newVehicles = vehicles.filter((vehicle) => vehicle.id !== id)
       setVehicles(newVehicles)
@@ -58,7 +58,7 @@ const VichlesSearch: FC = () => {
       sortState={sortState}
       setSortState={setSortState}
       sortingVehicles={sortingVehicles}
-      cbCrossButton={cbCrossButton}
+      cbDeleteCard={cbDeleteCard}
     />
   )
 }
