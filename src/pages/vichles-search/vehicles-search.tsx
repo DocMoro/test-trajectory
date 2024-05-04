@@ -3,6 +3,8 @@ import { VehiclesList } from '../../components/VehiclesList'
 import { TVehicle } from '../../constants/type'
 import { API_PATH, LOCAL_KEY_VEHICLE } from '../../constants/constants'
 import VehiclesContext from '../../store/VehiclesContext'
+import SortingDropdown from '../../components/SortingDropdown/SortingDropdown'
+import s from './vehicles-search.module.scss'
 
 const VichlesSearch: FC = () => {
   const [vehicles, setVehicles] = useState<TVehicle[]>([])
@@ -31,7 +33,10 @@ const VichlesSearch: FC = () => {
 
   return (
     <VehiclesContext.Provider value={{ vehicles, setVehicles }}>
-      <VehiclesList vehicles={vehicles} />
+      <section className={s.section}>
+        <SortingDropdown className={s.dropdown} />
+        <VehiclesList vehicles={vehicles} />
+      </section>
     </VehiclesContext.Provider>
   )
 }
