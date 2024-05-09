@@ -1,11 +1,11 @@
 import { FC } from 'react'
-
 import clsx from 'clsx'
 
-import s from './VehiclesList.module.scss'
-
 import { VehicleCard } from '../VehicleCard'
+
 import { TVehicle } from '../../constants/type'
+
+import s from './VehiclesList.module.scss'
 
 type VehiclesListProps = {
   vehicles: TVehicle[]

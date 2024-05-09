@@ -1,9 +1,12 @@
 import { FC } from 'react'
+import clsx from 'clsx'
+
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { ChevronDownIcon, DotFilledIcon } from '@radix-ui/react-icons'
-import './SortingDropdown.css'
-import clsx from 'clsx'
+
 import { sortingDropdownData } from '../../constants/constants'
+
+import './SortingDropdown.css'
 
 type SortingDropdownProps = {
   setSortState: (value: string) => void

@@ -88,17 +88,3 @@
   background: #ff6838;
   animation: preloader-inside-red 1s ease-in-out infinite;
 }
-
-.popup {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: 2;
-}

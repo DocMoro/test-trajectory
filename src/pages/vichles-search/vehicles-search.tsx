@@ -1,8 +1,10 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+
+import VehiclesSearchContainer from './vehicles-search-container'
+
 import { TVehicle } from '../../constants/type'
 import { API_PATH, LOCAL_KEY_VEHICLE, sortingDropdownData } from '../../constants/constants'
 import { getLocalData, updateDatabase } from '../../utils/database'
-import VehiclesSearchContainer from './vehicles-search-container'
 
 const VichlesSearch: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)

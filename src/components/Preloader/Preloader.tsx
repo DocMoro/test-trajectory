@@ -1,5 +1,6 @@
-import './Preloader.css'
 import * as Portal from '@radix-ui/react-portal'
+
+import './Preloader.css'
 
 const Preloader = () => {
   return (

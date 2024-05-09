@@ -1,6 +1,7 @@
 import { FC, SyntheticEvent } from 'react'
-import s from './CloseButton.module.scss'
 import clsx from 'clsx'
+
+import s from './CloseButton.module.scss'
 
 type CloseButtonProps = {
   handleClose: (event: SyntheticEvent<HTMLButtonElement>) => void
