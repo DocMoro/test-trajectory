@@ -1,30 +1,40 @@
-# React + TypeScript + Vite
+# Test assignment for Trajectory.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Использован шаблон vite@latest --template react-ts
 
-Currently, two official plugins are available:
+Для первичной инициализации проекта в его директории сперва нужно установить зависимости с помощью команды:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```sh
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Для локального запуска проекта нужно использовать команду
+
+```sh
+npm start
+```
+
+**_Ссылка на продакшн: [idea-platform](https://docmoro.github.io/test-trajectory/)_**
+
+### Автоформатирование и проверка кода реализованы через Prettier и ESLint.
+
+## В проекте использованы библиотеки
+
+- [x] React;
+- [x] Typescript;
+- [x] Radix;
+- [x] Sass;
+- [x] clsx;
+- [x] prettier;
+
+### Описание:
+
+Для ускорения разработки использованы шаблоны UI-компонентов **Radix**.
+
+Данные для списка автомобилей получаются по api. Реализована сортировка по ресурсам. При нажатии на карточку открывается форма для редактирования. Форма закрывается кликом вне окна, с помощью клавиши `ESC`, а также по кнопке для мобильных устройств. Все изменения сохраняюся в `localStorage`. Добавлен компонент Preloader для загрузок.
+
+Добавлена "ленивая" загрузка страницы. Был оптимизирован рендер компонентов за счёт вынесения сторонних функций в отдельный файл. В некоторых случаях вёрстка и логика компонентов разделены.
+
+---
+
+Любые замечания по работе приложения приветствуются 😊
