@@ -41,7 +41,7 @@ const EditCardFormPopup: FC<EditCardFormPopupProps> = ({
   }, [])
 
   return (
-    <Portal.Root className={s.popup} onClick={handleClosePopup}>
+    <Portal.Root className="popup" onClick={handleClosePopup}>
       <div className={s.dialog}>
         <EditCardForm stateForPopup={stateForPopup} cbSubmitForm={cbSubmitForm} />
         <CloseButton title="Close form" handleClose={handleClosePopup} />
