@@ -14,7 +14,7 @@ npm install
 npm start
 ```
 
-**_Ссылка на продакшн: [idea-platform](https://docmoro.github.io/test-trajectory/)_**
+**_Ссылка на продакшн: [test-trajectory](https://docmoro.github.io/test-trajectory/)_**
 
 ### Автоформатирование и проверка кода реализованы через Prettier и ESLint.
 
