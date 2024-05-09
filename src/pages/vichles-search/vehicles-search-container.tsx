@@ -1,12 +1,17 @@
 import { FC } from 'react'
-import s from './vehicles-search.module.scss'
+
 import SortingDropdown from '../../components/SortingDropdown/SortingDropdown'
 import { VehiclesList } from '../../components/VehiclesList'
 import EditCardFormPopup from '../../components/EditCardForm/EditCardFormPopup'
+import Preloader from '../../components/Preloader/Preloader'
 import usePopup from '../../hooks/use-popup'
+
 import { TVehicle } from '../../constants/type'
 
+import s from './vehicles-search.module.scss'
+
 type VehiclesSearchContainerProps = {
+  isLoading: boolean
   vehicles: TVehicle[]
   setVehicles: (arr: TVehicle[]) => void
   sortState: string
@@ -16,6 +21,7 @@ type VehiclesSearchContainerProps = {
 }
 
 const VehiclesSearchContainer: FC<VehiclesSearchContainerProps> = ({
+  isLoading,
   vehicles,
   setVehicles,
   sortState,
@@ -39,6 +45,7 @@ const VehiclesSearchContainer: FC<VehiclesSearchContainerProps> = ({
           cbSubmitForm={cbSubmitForm}
         />
       )}
+      {isLoading && <Preloader />}
     </section>
   )
 }

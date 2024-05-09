@@ -1,9 +1,10 @@
 import { FC, SyntheticEvent, useCallback } from 'react'
 
+import CloseButton from '../CloseButton/CloseButton'
+
 import { TVehicle } from '../../constants/type'
 
 import s from './VehicleCard.module.scss'
-import CloseButton from '../CloseButton/CloseButton'
 
 type VehicleCardProps = {
   vehicle: TVehicle

@@ -1,10 +1,13 @@
+import { FC, SyntheticEvent, useCallback, useEffect } from 'react'
+
 import * as Portal from '@radix-ui/react-portal'
 import EditCardForm from './EditCardForm'
-import s from './EditCardFormPopup.module.scss'
-import { TVehicle } from '../../constants/type'
-import { FC, SyntheticEvent, useCallback, useEffect } from 'react'
-import { ESC } from '../../constants/constants'
 import CloseButton from '../CloseButton/CloseButton'
+
+import { TVehicle } from '../../constants/type'
+import { ESC } from '../../constants/constants'
+
+import s from './EditCardFormPopup.module.scss'
 
 type EditCardFormPopupProps = {
   stateForPopup: TVehicle
@@ -41,7 +44,7 @@ const EditCardFormPopup: FC<EditCardFormPopupProps> = ({
   }, [])
 
   return (
-    <Portal.Root className={s.popup} onClick={handleClosePopup}>
+    <Portal.Root className="popup" onClick={handleClosePopup}>
       <div className={s.dialog}>
         <EditCardForm stateForPopup={stateForPopup} cbSubmitForm={cbSubmitForm} />
         <CloseButton title="Close form" handleClose={handleClosePopup} />

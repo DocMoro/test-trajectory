@@ -1,8 +1,15 @@
-import './App.css'
-import VichlesSearch from './pages/vichles-search/vehicles-search'
+import './App.scss'
+import { Suspense, lazy } from 'react'
+import Preloader from './components/Preloader/Preloader'
+
+const VichlesSearch = lazy(() => import('./pages/vichles-search/vehicles-search'))
 
 function App() {
-  return <VichlesSearch />
+  return (
+    <Suspense fallback={<Preloader />}>
+      <VichlesSearch />
+    </Suspense>
+  )
 }
 
 export default App

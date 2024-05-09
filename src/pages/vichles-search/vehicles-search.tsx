@@ -1,10 +1,13 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+
+import VehiclesSearchContainer from './vehicles-search-container'
+
 import { TVehicle } from '../../constants/type'
 import { API_PATH, LOCAL_KEY_VEHICLE, sortingDropdownData } from '../../constants/constants'
 import { getLocalData, updateDatabase } from '../../utils/database'
-import VehiclesSearchContainer from './vehicles-search-container'
 
 const VichlesSearch: FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [vehicles, setVehicles] = useState<TVehicle[]>([])
   const [sortState, setSortState] = useState<string>(sortingDropdownData[0])
 
@@ -16,8 +19,11 @@ const VichlesSearch: FC = () => {
       if (localData) {
         data = localData
       } else {
+        setIsLoading(true)
         const res = await fetch(API_PATH)
         data = await res.json()
+        updateDatabase(data)
+        setIsLoading(false)
       }
       setVehicles(data)
     } catch (err) {
@@ -53,6 +59,7 @@ const VichlesSearch: FC = () => {
 
   return (
     <VehiclesSearchContainer
+      isLoading={isLoading}
       vehicles={vehicles}
       setVehicles={setVehicles}
       sortState={sortState}
